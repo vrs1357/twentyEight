@@ -1,0 +1,9 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "server.js",
+  "dependencies": {
+    "boardgame.io": "^0.50.2",
+    "express": "^5.1.0"
+  }
+}
