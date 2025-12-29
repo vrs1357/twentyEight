@@ -1,6 +1,6 @@
 import { Toaster, toast } from "react-hot-toast";
 import Card from "./card";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function Board({ G, ctx, playerID, matchData, moves }) {
 
@@ -8,8 +8,7 @@ export default function Board({ G, ctx, playerID, matchData, moves }) {
   const [bidValue, setBidValue] = useState(15);
   const [strongIndex, setStrongIndex] = useState(null);
   const [willBid, setWillBid] = useState(false);
- 
-
+  
   const playerHand = G.players && G.players[playerID] && G.players[playerID].hand ? G.players[playerID].hand : [];
 
   const rotatedPlayerIDs = Array.from({ length: 4 }, (_, i) =>
@@ -19,6 +18,7 @@ export default function Board({ G, ctx, playerID, matchData, moves }) {
   const isInitialBidding = ctx.phase === "initialBidding";
   const isFinalBidding = ctx.phase === "finalBidding";
   const isPlay = ctx.phase === "play";
+  const isClearing = ctx.phase === "clearMat";
   const isYourTurn = ctx.currentPlayer === playerID;
   const isHighestBidder = G.highestBidder === playerID;
 
@@ -178,8 +178,6 @@ export default function Board({ G, ctx, playerID, matchData, moves }) {
     const team1 = ["0", "2"];
     const team2 = ["1", "3"];
 
-    const nameFor = (pid) => matchData?.[pid]?.name ?? `Player ${pid}`;
-
     const team1Score = G.team1Score;
     const team2Score = G.team2Score;
 
@@ -277,6 +275,14 @@ export default function Board({ G, ctx, playerID, matchData, moves }) {
     );
   };
 
+  useEffect(() => {
+    if(isClearing && String(ctx.currentPlayer) === String(playerID)) {
+      const timeout = setTimeout(() => {
+        moves.finishClearing(playerID);
+      }, 400);
+      return () => clearTimeout(timeout);
+    }
+  }, [isClearing, moves]);
 
   if (!ctx || playerID === null) {
     return (
