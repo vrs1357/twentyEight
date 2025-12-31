@@ -5,6 +5,9 @@ import { LobbyClient } from 'boardgame.io/client';
 import { Game } from './Game';
 import Board from './Board';
 import toast, { Toaster } from 'react-hot-toast';
+
+console.log("ENV DUMP:", import.meta.env);
+
 const SERVER_URL = import.meta.env.VITE_BGIO_SERVER;
 
 
