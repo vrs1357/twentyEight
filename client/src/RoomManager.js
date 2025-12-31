@@ -8,7 +8,7 @@ import toast, { Toaster } from 'react-hot-toast';
 const SERVER_URL = import.meta.env.BGIO_SERVER;
 
 
-const SERVER = `http://${BGIO_SERVER}`;
+const SERVER = `http://${SERVER_URL}`;
 const GAME_NAME = 'twenty-eight';
 
 const CardGameClient = Client({
