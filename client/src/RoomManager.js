@@ -5,8 +5,10 @@ import { LobbyClient } from 'boardgame.io/client';
 import { Game } from './Game';
 import Board from './Board';
 import toast, { Toaster } from 'react-hot-toast';
+const SERVER_URL = import.meta.env.BGIO_SERVER;
 
-const SERVER = 'http://localhost:8000';
+
+const SERVER = `http://${BGIO_SERVER}`;
 const GAME_NAME = 'twenty-eight';
 
 const CardGameClient = Client({
