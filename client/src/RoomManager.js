@@ -7,7 +7,7 @@ import Board from './Board';
 import toast, { Toaster } from 'react-hot-toast';
 
 
-const SERVER = `http://40.233.111.12`;
+const SERVER = `https://40.233.111.12`;
 const GAME_NAME = 'twenty-eight';
 
 const CardGameClient = Client({
