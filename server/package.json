@@ -2,6 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "main": "server.js",
+  "type": "module",
   "dependencies": {
     "boardgame.io": "^0.50.2",
     "cors": "^2.8.5",
