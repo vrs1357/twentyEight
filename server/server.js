@@ -1,4 +1,4 @@
-import cors from 'cors';
+import KoaCors from '@koa/cors';
 import { Server, Origins, SocketIO } from 'boardgame.io/dist/cjs/server.js';
 import { Game } from './game.js';
 
@@ -16,11 +16,11 @@ const server = Server({
   }),
 });
 
-// Apply CORS middleware to REST endpoints
-server.app.use(cors({
+// Use Koa CORS middleware for REST endpoints
+server.app.use(KoaCors({
   origin: FRONTEND_URL,
-  methods: ['GET','POST','OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  allowMethods: ['GET','POST','OPTIONS'],
+  allowHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
 }));
 
