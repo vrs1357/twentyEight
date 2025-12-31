@@ -7,6 +7,7 @@ import Board from './Board';
 import toast, { Toaster } from 'react-hot-toast';
 
 console.log("ENV DUMP:", process.env);
+console.log("expected: ", process.env.REACT_BGIO_SERVER);
 
 const SERVER_URL = process.env.REACT_BGIO_SERVER;
 
