@@ -5,7 +5,7 @@ import { LobbyClient } from 'boardgame.io/client';
 import { Game } from './Game';
 import Board from './Board';
 import toast, { Toaster } from 'react-hot-toast';
-const SERVER_URL = import.meta.env.BGIO_SERVER;
+const SERVER_URL = import.meta.env.VITE_BGIO_SERVER;
 
 
 const SERVER = `http://${SERVER_URL}`;
