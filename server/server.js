@@ -1,5 +1,5 @@
 import cors from 'cors';
-import { Server, SocketIO } from 'boardgame.io/server';
+import { Server, SocketIO } from 'boardgame.io/dist/cjs/server.js';
 import { Game } from './game.js';
 
 // Allow your Vercel frontend
