@@ -4,6 +4,7 @@
   "main": "server.js",
   "dependencies": {
     "boardgame.io": "^0.50.2",
+    "cors": "^2.8.5",
     "express": "^5.1.0"
   }
 }
