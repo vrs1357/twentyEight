@@ -1,7 +1,7 @@
 import cors from 'cors'
 
 const { Server, Origins, SocketIO } = require('boardgame.io/server');
-const { Game } = require('./Game.js');
+const { Game } = require('./game.js');
 
 
 const server = Server({
