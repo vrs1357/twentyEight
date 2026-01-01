@@ -26,7 +26,6 @@ export const Game = {
         mustPlayTrump: false,
         pointsTally: 0,
         nextGame: false,
-        cleared: false,
       };
     }
     return {
@@ -50,7 +49,7 @@ export const Game = {
       overallScore2: 0,
       team2Score: 0,
       team1Won: null,
-      clearing: false,
+
       joinCode: joinCode,
       roomName: roomName,
     };
@@ -66,7 +65,6 @@ export const Game = {
           G.players[pid].hasPlayed = false;
           G.players[pid].pointsTally = 0;
           G.players[pid].nextGame = false;
-          G.players[pid].cleared = false;
         }
         G.round = 0;
         G.strongSuitCard = null;
@@ -74,7 +72,6 @@ export const Game = {
         G.highestBidder = null;
         G.highestBid = 0;
         G.trumpAsked = false;
-        G.clearing = false;
         G.playedCards = [];
         G.firstBidder = (G.firstBidder + 1) % 4; 
         G.prevRoundWinner = String(G.firstBidder);
@@ -260,11 +257,8 @@ export const Game = {
         for (let i = 0; i < ctx.numPlayers; i++) {
           const pid = String(i);
           G.players[pid].hasPlayed = false;
-          G.players[pid].cleared = false;
         }
-        // reset played cards
-        G.playedCards = []
-        G.clearing = false;
+
         // set correct round no
         if(G.round === 0){
           G.round++;
@@ -322,10 +316,10 @@ export const Game = {
               return;
             }
           }
-          // // reset in case new round
-          // if(G.playedCards.length === 4){
-          //   G.playedCards = [];
-          // }
+          // reset in case new round
+          if(G.playedCards.length === 4){
+            G.playedCards = [];
+          }
 
           G.playedCards.push({ ...card, playerID: ctx.currentPlayer });
           G.players[String(ctx.currentPlayer)].mustPlayTrump = false;
@@ -402,8 +396,6 @@ export const Game = {
 
     clearMat: {
       onBegin: ({G, ctx, events}) => {
-        // set clearing flag
-        G.clearing = true;
         console.log("save mat state");
         if(G.round !== 0){
           const snapshot = G.playedCards.map(c => ({ ...c }));
@@ -432,37 +424,8 @@ export const Game = {
         const totalPoints = cardsFromRound.reduce((sum, card) => sum + (G.pointsOrder[card.rank] ?? 0), 0);
         G.players[G.prevRoundWinner].pointsTally += totalPoints;
         G.round++;
-        console.log("waiting on UI updates");
-      },
-
-      moves: {
-        finishClearing({G, ctx, events}, playerNo) {
-          G.players[String(playerNo)].cleared = true;
-          console.log(`Player ${playerNo} cleaned table`);
-          events.endTurn();
-        },
-      },
-
-      turn: {
-        order: {
-          first: ({G}) => Number(G.prevRoundWinner),
-          next: ({ ctx }) => (ctx.playOrderPos + 1) % ctx.numPlayers,
-        },
-      },
-
-      endIf: ({G, ctx, events}) => {
-        const allCleared = Object.values(G.players).every(p => p.cleared);
-        if(allCleared) {
-          if(G.round > 8){
-            console.log("Going to next phase: scoring");
-            events.setPhase('scoring');
-          } else {
-            console.log('Going to next phase: play');
-            events.setPhase('play');
-          }
-        } else {
-          return false;
-        }
+        console.log("going to next round of play");
+        events.setPhase('play');
       },
     },
 
