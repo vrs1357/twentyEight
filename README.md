@@ -1,6 +1,6 @@
 # 28 - The Game
 
-I came up with an online version of a game played at home, called 28. You can find instructions on how to play it, or deploy it on your own. Known issues/bugs/fixes can be found at the end, feel free to create a PR for a fix
+I came up with an online version of a game played at home, called 28. A demo can be played on [twenty-eight-game.vercel.app](twenty-eight-game.vercel.app) You can find instructions on how to play it, or deploy it on your own. Known issues/bugs/fixes can be found at the end, feel free to create a PR for a fix
 
 This game was written using boardgame.io. Documentation for how to modify the game/use boardgame.io can be found [here](https://boardgame.io/).
 ## Game Rules
